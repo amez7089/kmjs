@@ -12,7 +12,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 import traceback
 from selenium.webdriver.common.keys import Keys
-# 打开用例文件，读取对应用例的用户名等数据
+# 打开用例文件，读取对应用例的用户名等数据11
 import kmjsh5
 #定义数据表格读写格式
 (ws,table,wb,style1,style2)=kmjsh5.open_xlrd()
