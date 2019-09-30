@@ -12,7 +12,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 import traceback
 from selenium.webdriver.common.keys import Keys
-# 打开用例文件，读取对应用例的用户名等数据11
+# 打开用例文件，读取对应用例的用户名等数据
 import kmjsh5
 #定义数据表格读写格式
 (ws,table,wb,style1,style2)=kmjsh5.open_xlrd()
@@ -27,7 +27,7 @@ try:
     passWord = table.cell(9, 5).value
     print passWord
     loginadress = table.cell(3, 5).value
-    # 定义H5机型1
+    # 定义H5机型
     driver=kmjsh5.open_browse()
     # 打开谷歌浏览器
     kmjsh5.open_homepage(driver, loginadress)
@@ -40,7 +40,37 @@ try:
     if code==0:
         ws.write(3, 10, u'用户登陆成功')
     else: ws.write(3, 10, u'用户登陆失败')
-
+    driver.find_element_by_xpath('//*[@id="app"]/div/div/ul/li[1]/p[1]').click()
+    # driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/div/div/section[3]/div[1]/a/span').click()
+    driver.find_element_by_link_text('艾美小店').click()
+    time.sleep(2)
+    driver.find_element_by_xpath('//*[@id="app"]/div/div[3]/div/div[1]/ul/li[2]/div/div[1]/img').click()
+    driver.find_element_by_xpath('//*[@id="app"]/div/div[7]/button[1]').click()
+    driver.find_element_by_xpath('//*[@id="app"]/div/div[9]/div[2]/div[1]/div[2]/div/input').send_keys(10)
+    time.sleep(1)
+    driver.find_element_by_xpath('//*[@id="app"]/div/div[9]/div[3]/button').click()
+    time.sleep(1)
+    driver.find_element_by_xpath('//*[@id="app"]/div/div[1]/div[2]/img[1]').click()
+    driver.find_element_by_xpath('//*[@id="app"]/div/div/footer/div/div[1]/label').click()
+    time.sleep(1)
+    driver.find_element_by_xpath('//*[@id="app"]/div/div/footer/button').click()
+    time.sleep(1)
+    driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/div[4]/div/div[2]/button').click()
+    time.sleep(1)
+    driver.find_element_by_xpath('//*[@id="app"]/div/div/div[1]/i').click()
+    time.sleep(1)
+    driver.find_element_by_xpath('//*[@id="app"]/div/div[3]/div[2]/button[2]').click()
+    time.sleep(1)
+    driver.find_element_by_xpath('//*[@id="app"]/div/div[1]/div/div/div[1]/i').click()
+    time.sleep(1)
+    staer=driver.find_element_by_xpath('//*[@id="app"]/div/div[2]/div/div/section[1]/div[2]/div[2]/div/div/div/span[1]').text
+    print staer
+    if staer=='取消订单':
+        print u'创建待支付订单成功'
+        ws.write(4, 10, u'创建待支付订单成功')
+    else:
+        print  u'创建待支付订单失败'
+        ws.write(4, 10, u'创建待支付订单失败')
     errorFlag = 1
     print (u"Case--kmjs-001-Login已注册会员购买商品时提示登录--结果：Pass!")
 except Exception as e:
@@ -61,7 +91,7 @@ finally:
     # 写入执行日期
     ws.write(3, 8, datetime.now(), style1)
     # 利用保存时同名覆盖达到修改excel文件的目的,注意未被修改的内容保持不变
-    wb.save('E:\\PythonProject\\mrbtest\\kmjs\\kmh5\\H5TestData.xls')
+    wb.save('E:\\PythonProject\\mrbtest\\kmjs\\kmjsh5\\H5TestData.xls')
     # 退出浏览器
     driver.quit()
     print u"Case--kmjs-001-Login已注册会员购买商品时提示登录.py运行结束！！！"

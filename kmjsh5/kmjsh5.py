@@ -12,6 +12,15 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 import traceback
 from selenium.webdriver.common.keys import Keys
+
+
+# 打开网页并最大化窗口
+def open_homepage(browse, url):
+    # 最大化浏览器
+    browse.maximize_window()
+    # 打开康美首页地址
+    browse.get(url)
+#自定义H5机型
 def open_browse():
     # 定义H5机型
     mobile_emulation = {
@@ -59,6 +68,7 @@ def open_browse():
         # "deviceName": "Samsung Galaxy Tab"
         # "deviceName": "Notebook with touch"\
         'deviceName': 'iPhone X'
+        # 'deviceName': mps
         # Or specify a specific build using the following two arguments
         # "deviceMetrics": { "width": 360, "height": 640, "pixelRatio": 3.0 },
         # "userAgent": "Mozilla/5.0 (Linux; Android 4.2.1; en-us; Nexus 5 Build/JOP40D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19" }
@@ -69,15 +79,9 @@ def open_browse():
     return driver
 
 
-# 打开并最大化网页窗口
-def open_homepage(browse, url):
-    # 最大化浏览器
-    browse.maximize_window()
-    # 打开康美首页地址
-    browse.get(url)
 def open_xlrd():
     # 打开用例文件，读取对应用例的用户名等数据EE:\PythonProject\mrbtest\kmjs\kmh5
-    casefile = xlrd.open_workbook('E:\\PythonProject\\mrbtest\\kmjs\\kmh5\\H5TestData.xls', formatting_info=True)
+    casefile = xlrd.open_workbook('E:\\PythonProject\\mrbtest\\kmjs\\kmjsh5\\H5TestData.xls', formatting_info=True)
     # 设置日期格式
     style1 = xlwt.XFStyle()
     style1.num_format_str = 'YYYY-MM-DD HH:MM:SS'
